@@ -1,0 +1,79 @@
+:root {
+    --panel-open: 0;
+    --panel-width: 300px;
+    --panel-closed: max(var(--panel-open) - 1, (var(--panel-open) - 1) * -1);
+    --panel-max-width: 500px;
+    --animation-direction: slideout;
+    --inited: 0;
+    --animation-duration: calc(var(--inited) * 0.5s);
+}
+
+:root:hover {
+    --inited: 1;
+}
+
+:root:has(#toggle:checked) {
+    --panel-open: 1;
+    --animation-direction: slidein;
+}
+
+#toggle {
+    visibility: hidden;
+    width: 0;
+}
+
+#toggle + label {
+    position: relative;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-size: 16px;
+    margin-left: calc((var(--panel-width) - 40px) * var(--panel-open));
+    z-index: 1;
+    animation-name: var(--animation-direction);
+    animation-duration: var(--animation-duration);
+}
+
+#toggle + label:hover {
+    cursor: pointer;
+}
+
+#toggle + label::before {
+    content: "\f0c9";
+    display: inline-block;
+    position: relative;
+}
+
+#toggle:checked + label::before {
+    content: "\f00d";
+}
+
+#left-panel {
+    position: absolute;
+    top: 0;
+    left: calc(var(--panel-width) * -1 * var(--panel-closed));
+    width: var(--panel-width);
+    bottom: 50px;
+    border: solid 1px black;
+    animation-name: var(--animation-direction);
+    animation-duration: var(--animation-duration);
+}
+
+@keyframes slidein {
+    from {
+        left: calc(var(--panel-width) * -1);
+    }
+
+    to {
+        left: 0;
+    }
+}
+
+@keyframes slideout {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: calc(var(--panel-width) * -1);
+    }
+}

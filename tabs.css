@@ -1,0 +1,66 @@
+body {
+    overflow: hidden;
+}
+
+:root {
+    --selected-tab: 1;
+    --panel-width: 300px;
+}
+
+:root:has(#tab1:checked) {
+    --selected-tab: 1;
+}
+
+:root:has(#tab2:checked) {
+    --selected-tab: 2;
+}
+
+:root:has(#tab3:checked) {
+    --selected-tab: 3;
+}
+
+.panel {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: var(--panel-width);
+    bottom: 0;
+    border: solid 1px black;
+    padding: 10px;
+}
+
+#tabpanel1 {
+    left: calc((var(--selected-tab) - 1) * 99999px);
+}
+
+#tabpanel2 {
+    left: calc((var(--selected-tab) - 2) * 99999px);
+}
+
+#tabpanel3 {
+    left: calc((var(--selected-tab) - 3) * 99999px);
+}
+
+input[type=radio] {
+    visibility: hidden;
+    width: 100px;
+    display: inline-block;
+}
+
+input[type=radio]:not(:checked) {
+    cursor: pointer;
+}
+
+input[type=radio]::after {
+    visibility: visible;
+    border: solid 1px black;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    content: attr(id);
+}
+
+input[type=radio]:not(:checked)::after {
+    background-color: #CCC;
+}
