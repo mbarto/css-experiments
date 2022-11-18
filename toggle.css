@@ -52,7 +52,7 @@
     top: 0;
     left: calc(var(--panel-width) * -1 * var(--panel-closed));
     width: var(--panel-width);
-    bottom: 50px;
+    bottom: 0;
     border: solid 1px black;
     animation-name: var(--animation-direction);
     animation-duration: var(--animation-duration);
