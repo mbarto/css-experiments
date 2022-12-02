@@ -27,18 +27,25 @@ body {
     bottom: 0;
     border: solid 1px black;
     padding: 10px;
+    visibility: hidden;
 }
 
 #tabpanel1 {
-    left: calc((var(--selected-tab) - 1) * 99999px);
+    @when (var(--selected-tab) = 1) {
+        visibility: visible;
+    }
 }
 
 #tabpanel2 {
-    left: calc((var(--selected-tab) - 2) * 99999px);
+    @when (var(--selected-tab) =2) {
+        visibility: visible;
+    }
 }
 
 #tabpanel3 {
-    left: calc((var(--selected-tab) - 3) * 99999px);
+    @when (var(--selected-tab) = 3) {
+        visibility: visible;
+    }
 }
 
 input[type=radio] {

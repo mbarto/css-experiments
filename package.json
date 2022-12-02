@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "css-polyfills": "0.0.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -17,6 +16,8 @@
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
+    "postcss": "^8.4.19",
+    "postcss-when": "0.0.0",
     "typescript": "^4.6.4",
     "vite": "^3.2.3"
   }
