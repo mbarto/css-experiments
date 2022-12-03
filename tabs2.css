@@ -37,7 +37,7 @@ body {
 }
 
 #tabpanel2 {
-    @when (var(--selected-tab) =2) {
+    @when (var(--selected-tab) = 2) {
         visibility: visible;
     }
 }
