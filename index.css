@@ -1,0 +1,15 @@
+li {
+    list-style-type: none;
+}
+
+@supports selector(*:has(*)) {
+    li a[href*='-polyfill'] {
+        display: none;
+    }
+}
+
+@supports not selector(*:has(*)) {
+    li a:not([href*='polyfill']) {
+        display: none;
+    }
+}

@@ -1,0 +1,78 @@
+:root {
+    --panel-open: 0;
+    --panel-width: 300px;
+    --panel-closed: max(var(--panel-open) - 1, (var(--panel-open) - 1) * -1);
+    --panel-max-width: 500px;
+    --inited: 0;
+    --animation-duration: calc(var(--inited) * 0.5s);
+}
+
+:root:hover {
+    --inited: 1;
+}
+
+:root:not(:has(#toggle:checked)) {
+    --panel-open: 0;
+    --animation-direction: slideout;
+}
+
+:root:has(#toggle:checked) {
+    --panel-open: 1;
+    --animation-direction: slidein;
+}
+
+#toggle {
+    appearance: none;
+    position: relative;
+    z-index: 1;
+    
+    margin-left: calc((var(--panel-width) - 40px) * var(--panel-open));
+    
+    animation-name: var(--animation-direction);
+    animation-duration: var(--animation-duration);
+}
+
+#toggle::before {
+    content: "\f0c9";
+    font-family: FontAwesome;
+    font-size: 16px;
+}
+
+#toggle:hover {
+    cursor: pointer;
+}
+
+#toggle:checked::before {
+    content: "\f00d";
+}
+
+#left-panel {
+    position: absolute;
+    top: 0;
+    left: calc(var(--panel-width) * -1 * var(--panel-closed));
+    width: var(--panel-width);
+    bottom: 0;
+    border: solid 1px black;
+    animation-name: var(--animation-direction);
+    animation-duration: var(--animation-duration);
+}
+
+@keyframes slidein {
+    from {
+        left: calc(var(--panel-width) * -1);
+    }
+
+    to {
+        left: 0;
+    }
+}
+
+@keyframes slideout {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: calc(var(--panel-width) * -1);
+    }
+}
