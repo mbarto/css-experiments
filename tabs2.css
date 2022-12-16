@@ -30,6 +30,17 @@ body {
     visibility: hidden;
 }
 
+@supports not selector(:has(a, b)) {
+    .panel::after {
+        position: relative;
+        display: inline-block;
+        top: 2rem;
+        text-align: center;
+        width: var(--panel-width);
+        content: "Selector :has not supported on this browser!\A Cannot implement tab switching"
+    }
+}
+
 #tabpanel1 {
     @when (var(--selected-tab) = 1) {
         visibility: visible;
@@ -49,9 +60,7 @@ body {
 }
 
 input[type=radio] {
-    visibility: hidden;
-    width: 100px;
-    display: inline-block;
+    appearance: none;
 }
 
 input[type=radio]:not(:checked) {
@@ -59,7 +68,6 @@ input[type=radio]:not(:checked) {
 }
 
 input[type=radio]::after {
-    visibility: visible;
     border: solid 1px black;
     padding-left: 10px;
     padding-right: 10px;

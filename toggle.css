@@ -1,4 +1,5 @@
 :root {
+    --panel-open: 0;
     --panel-width: 300px;
     --panel-closed: max(var(--panel-open) - 1, (var(--panel-open) - 1) * -1);
     --panel-max-width: 500px;
@@ -21,21 +22,18 @@
 }
 
 #toggle {
-    visibility: hidden;
+    appearance: none;
     position: relative;
-    display: inline-block;
+    z-index: 1;
     
     margin-left: calc((var(--panel-width) - 40px) * var(--panel-open));
-    z-index: 1;
+    
     animation-name: var(--animation-direction);
     animation-duration: var(--animation-duration);
 }
 
 #toggle::before {
-    visibility: visible;
     content: "\f0c9";
-    display: inline-block;
-    position: relative;
     font-family: FontAwesome;
     font-size: 16px;
 }
@@ -57,6 +55,21 @@
     border: solid 1px black;
     animation-name: var(--animation-direction);
     animation-duration: var(--animation-duration);
+}
+
+
+@supports not selector(:has(a, b)) {
+    #left-panel {
+        left: 0;
+    }
+    #left-panel::before {
+        position: relative;
+        display: inline-block;
+        top: 2rem;
+        text-align: center;
+        width: var(--panel-width);
+        content: "Selector :has not supported on this browser!\A Cannot implement panel open/close"
+    }
 }
 
 @keyframes slidein {

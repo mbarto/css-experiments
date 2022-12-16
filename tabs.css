@@ -29,6 +29,17 @@ body {
     padding: 10px;
 }
 
+@supports not selector(:has(a, b)) {
+    .panel::after {
+        position: relative;
+        display: inline-block;
+        top: 2rem;
+        text-align: center;
+        width: var(--panel-width);
+        content: "Selector :has not supported on this browser!\A Cannot implement tab switching"
+    }
+}
+
 #tabpanel1 {
     left: calc((var(--selected-tab) - 1) * 99999px);
 }
@@ -42,9 +53,7 @@ body {
 }
 
 input[type=radio] {
-    visibility: hidden;
-    width: 100px;
-    display: inline-block;
+    appearance: none;
 }
 
 input[type=radio]:not(:checked) {
@@ -52,13 +61,12 @@ input[type=radio]:not(:checked) {
 }
 
 input[type=radio]::after {
-    visibility: visible;
+    content: attr(data-title);
     border: solid 1px black;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 4px;
-    content: attr(data-title);
 }
 
 input[type=radio]:not(:checked)::after {
