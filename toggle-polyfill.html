@@ -6,11 +6,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="toggle-polyfill.css">
     <script src="https://unpkg.com/css-has-pseudo@4.0.2/dist/browser-global.js"></script>
-    <script>
-      if (!CSS.supports("selector(*:has(*))")) {
-        cssHasPseudo(document)
-      }
-    </script>
     <title>CSS Experiments: Toggle</title>
   </head>
   <body>
@@ -18,5 +13,10 @@
       <input type="checkbox" id="toggle" />
       <div id="left-panel"></div>
     </div>
+    <script>
+      if (!CSS.supports("selector(*:has(*))")) {
+        cssHasPseudo(document)
+      }
+    </script>
   </body>
 </html>

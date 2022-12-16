@@ -6,11 +6,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="tabs-polyfill.css">
     <script src="https://unpkg.com/css-has-pseudo@4.0.2/dist/browser-global.js"></script>
-    <script>
-      if (!CSS.supports("selector(*:has(*))")) {
-        cssHasPseudo(document)
-      }
-    </script>
     <title>CSS Experiments: Tab Panel</title>
   </head>
   <body>
@@ -22,5 +17,10 @@
       <div id="tabpanel2" class="panel">Panel 2</div>
       <div id="tabpanel3" class="panel">Panel 3</div>
     </div>
+    <script>
+      if (!CSS.supports("selector(*:has(*))")) {
+        cssHasPseudo(document)
+      }
+    </script>
   </body>
 </html>
