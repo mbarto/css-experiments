@@ -1,0 +1,43 @@
+
+#root {
+    --panel-width: 300px;
+}
+
+#toggle {
+    appearance: none;
+    position: relative;
+    z-index: 1;
+    
+    margin-left: 0;
+}
+
+#toggle:checked {
+    margin-left: calc(var(--panel-width) - 40px);
+}
+
+#toggle::before {
+    content: "\f0c9";
+    font-family: FontAwesome;
+    font-size: 16px;
+}
+
+#toggle:hover {
+    cursor: pointer;
+}
+
+#toggle:checked::before {
+    content: "\f00d";
+}
+
+#left-panel {
+    position: absolute;
+    top: 0;
+    left: calc(var(--panel-width) * -1);
+    width: var(--panel-width);
+    bottom: 0;
+    border: solid 1px black;
+}
+
+:root:has(#toggle:checked) #left-panel {
+    left: 0;
+}
