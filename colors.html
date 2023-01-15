@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="colors.css">
+    <title>CSS Experiments: Color Chooser</title>
+  </head>
+  <body>
+    <div id="root">
+      <div id="bars">
+        <div class="bar"><label>H</label><input type="range" id="hue" min="0" max="360" value="360"/></div>
+        <div class="bar"><label>S</label><input type="range" id="saturation" min="0" max="100" value="100" /></div>
+        <div class="bar"><label>L</label><input type="range" id="lightness" min="0" max="100" value="50" /></div>
+      </div>
+      <div id="sample"></div>
+    </div>
+    <script>
+      document.querySelectorAll("input[type='range']").forEach(function(input) {
+        input.addEventListener("input", function(evt) {
+          input.setAttribute("value", evt.target.value)
+        })
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+
+#root {
+    height: 100%;
+    display: flex;
+}
+
+#toc {
+    border: solid 1px black;
+    padding: 10px;
+}
+
+#toc {
+    flex-basis: 10%;
+}
+
+.panel, #panels {
+    flex-basis: 100%;
+}
+
+.panel {
+    display: none;
+    padding: 10px;
+}
+
+#panels {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+:root:has(#toggle1:checked) #panel1 {
+    display: block;
+}
+
+:root:has(#toggle2:checked) #panel2 {
+    display: block;
+}
+
+:root:has(#slider1[value="100"]) {
+    --slider1-value: 100%;
+}
+
+:root:has(#slider1[value="75"]) {
+    --slider1-value: 75%;
+}
+
+:root:has(#slider1[value="50"]) {
+    --slider1-value: 50%;
+}
+
+:root:has(#slider1[value="25"]) {
+    --slider1-value: 25%;
+}
+
+:root:has(#slider1[value="0"]) {
+    --slider1-value: 0%;
+}
+
+#panel1 {
+    opacity: var(--slider1-value);
+}

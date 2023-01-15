@@ -1,0 +1,35 @@
+
+#root {
+    height: 100%;
+    display: flex;
+}
+
+#bars {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 30%;
+}
+
+#sample {
+    width: 200px;
+    aspect-ratio: 1;
+    background-color: hsl(var(--hue), var(--saturation), var(--lightness));
+}
+
+@for $i from 0 to 360 {
+    :root:has(#hue[value="$i"]) {
+        --hue: $i;
+    }
+}
+
+@for $i from 0 to 100 {
+    :root:has(#saturation[value="$i"]) {
+        --saturation: $i%;
+    }
+}
+
+@for $i from 0 to 100 {
+    :root:has(#lightness[value="$i"]) {
+        --lightness: $i%;
+    }
+}

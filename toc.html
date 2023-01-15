@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="toc.css">
+    <title>CSS Experiments: Table of Contents</title>
+  </head>
+  <body>
+    <div id="root">
+      <div id="toc">
+        <details open>
+          <summary><input type="checkbox" id="toggle1" checked /> Item 1</summary>
+          <span><input step="25" type="range" id="slider1" min="0" max="100" value="100"/></span>
+        </details>
+        <details>
+          <summary><input type="checkbox" id="toggle2" />Item 2</summary>
+          <span><span><input step="25" type="range" id="slider2" min="0" max="100" value="100" /></span></span>
+        </details>
+      </div>
+      <div id="panels">
+        <div id="panel1" class="panel">Panel1</div>
+        <div id="panel2" class="panel">Panel2</div>
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll("input[type='range']").forEach(function(input) {
+        input.addEventListener("change", function(evt) {
+          input.setAttribute("value", evt.target.value)
+        })
+      })
+    </script>
+  </body>
+</html>
