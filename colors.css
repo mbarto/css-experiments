@@ -17,19 +17,20 @@
 }
 
 @for $i from 0 to 360 {
-    :root:has(#hue[value="$i"]) {
+    :root:has(#hue:[value="$i"]) {
         --hue: $i;
     }
 }
 
 @for $i from 0 to 100 {
-    :root:has(#saturation[value="$i"]) {
+    :root:has(#saturation:[value="$i"]) {
         --saturation: $i%;
     }
 }
 
 @for $i from 0 to 100 {
-    :root:has(#lightness[value="$i"]) {
+    :root:has(#lightness:[value="$i"]) {
         --lightness: $i%;
     }
 }
+

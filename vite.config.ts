@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import postcssWhen from "postcss-when"
+import postcssDynamicValue from "postcss-dynamic-value";
 import postcssFor from "postcss-for";
 import postcssHasPseudo from "css-has-pseudo"
 
@@ -24,7 +25,7 @@ export default defineConfig({
   plugins: [react()],
   css: {
     postcss: {
-      plugins: [postcssWhen(), postcssHasPseudo(), postcssFor()],
+      plugins: [postcssWhen(), postcssHasPseudo(), postcssFor(), postcssDynamicValue()],
     },
   },
 });

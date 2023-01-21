@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- https://github.com/tvler/Matching-Attribute-Values-CSS-Selector/blob/master/explainer.md -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="colors.css">
+    <script src="https://unpkg.com/postcss-dynamic-value@0.0.4/polyfill.js"></script>
     <title>CSS Experiments: Color Chooser</title>
   </head>
   <body>
@@ -17,11 +19,9 @@
       <div id="sample"></div>
     </div>
     <script>
-      document.querySelectorAll("input[type='range']").forEach(function(input) {
-        input.addEventListener("input", function(evt) {
-          input.setAttribute("value", evt.target.value)
-        })
-      })
+      if (!CSS.supports("selector(*:value[]))")) {
+        postCssDynamicValue(document)
+      }
     </script>
   </body>
 </html>
