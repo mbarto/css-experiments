@@ -19,6 +19,7 @@ export default defineConfig({
         toggle_novariables: "toggle-novariables.html",
         toc: "toc.html",
         colors: "colors.html",
+        colorspolyfill: "colors-polyfill.html",
       },
     },
   },
