@@ -20,6 +20,7 @@ export default defineConfig({
         toc: "toc.html",
         colors: "colors.html",
         colorspolyfill: "colors-polyfill.html",
+        tictactoe: "tictactoe.html",
       },
     },
   },

@@ -1,0 +1,279 @@
+/**
+ * Initial settings.
+ */
+:root {
+    --turn: "1";
+    --player: 1;
+    --player1-symbol: "x";
+    --player2-symbol: "o";
+}
+
+#grids-container {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    z-index: 0;
+}
+
+.player-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 0 100px 0 100px 0 100px;
+    width: 300px;
+    height: 300px;
+}
+
+/** --player=1 -> 1, --player=2 -> 0 **/
+#player1-grid {
+    z-index: calc(2 - var(--player)); 
+}
+/** --player=1 -> 0, --player=2 -> 1 **/
+#player2-grid {
+    z-index: calc(1 - calc(2 - var(--player))); 
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 0;
+    height: 0;
+}
+
+input[type="checkbox"]:not(:checked) + label {
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label {
+    pointer-events: none;
+}
+
+.player-grid label {
+    width: 90px;
+    height: 100px;
+    border: solid 1px black;
+    font-size: 150px;
+    line-height: 80px;
+    padding-left: 10px;
+    font-family: Arial;
+}
+
+input + label::after {
+    display: none;
+}
+
+#player1-grid input:checked + label::after {
+    content: var(--player1-symbol);
+    display: inline;
+}
+
+#player2-grid input:checked + label::after {
+    content: var(--player2-symbol);
+    display: inline;
+}
+
+/**
+ * Calculate turn and current player from checked cells.
+ */
+:root:has(input:checked) {
+    --turn: "2";
+    --player: 2;
+}
+
+:root:has(#player1-grid input:checked):has(#player2-grid input:checked) {
+    --turn: "3";
+    --player: 1;
+}
+
+:root:has(#player1-grid input:checked ~ input:checked):has(#player2-grid input:checked) {
+    --turn: "4";
+    --player: 2;
+}
+
+:root:has(#player1-grid input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked) {
+    --turn: "5";
+    --player: 1;
+}
+
+:root:has(#player1-grid input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked) {
+    --turn: "6";
+    --player: 2;
+}
+
+:root:has(#player1-grid input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked) {
+    --turn: "7";
+    --player: 1;
+}
+
+:root:has(#player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked) {
+    --turn: "8";
+    --player: 2;
+}
+
+:root:has(#player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked ~ input:checked) {
+    --turn: "9";
+    --player: 1;
+}
+
+:root:has(#player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked ~ input:checked) #draw {
+    display: block;
+}
+
+/**
+ * Avoid checkability of cells already checked by the other player.
+ */
+:root:has(#cell-1-1-1:checked) #cell-2-1-1 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-1-1-2:checked) #cell-2-1-2 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-1-1-3:checked) #cell-2-1-3 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-1-2-1:checked) #cell-2-2-1 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-1-2-2:checked) #cell-2-2-2 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-1-2-3:checked) #cell-2-2-3 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-1-3-1:checked) #cell-2-3-1 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-1-3-2:checked) #cell-2-3-2 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-1-3-3:checked) #cell-2-3-3 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-2-1-1:checked) #cell-1-1-1 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-2-1-2:checked) #cell-1-1-2 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-2-1-3:checked) #cell-1-1-3 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-2-2-1:checked) #cell-1-2-1 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-2-2-2:checked) #cell-1-2-2 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-2-2-3:checked) #cell-1-2-3 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-2-3-1:checked) #cell-1-3-1 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-2-3-2:checked) #cell-1-3-2 + label {
+    visibility: hidden;
+}
+
+:root:has(#cell-2-3-3:checked) #cell-1-3-3 + label {
+    visibility: hidden;
+}
+
+/**
+ * Player1 wins.
+ */
+:root:has(#cell-1-1-1:checked):has(#cell-1-1-2:checked):has(#cell-1-1-3:checked) #player1-wins {
+    display: block;
+}
+
+:root:has(#cell-1-2-1:checked):has(#cell-1-2-2:checked):has(#cell-1-2-3:checked) #player1-wins {
+    display: block;
+}
+
+:root:has(#cell-1-3-1:checked):has(#cell-1-3-2:checked):has(#cell-1-3-3:checked) #player1-wins {
+    display: block;
+}
+
+:root:has(#cell-1-1-1:checked):has(#cell-1-2-1:checked):has(#cell-1-3-1:checked) #player1-wins {
+    display: block;
+}
+
+:root:has(#cell-1-1-2:checked):has(#cell-1-2-2:checked):has(#cell-1-3-2:checked) #player1-wins {
+    display: block;
+}
+
+:root:has(#cell-1-1-3:checked):has(#cell-1-2-3:checked):has(#cell-1-3-3:checked) #player1-wins {
+    display: block;
+}
+
+:root:has(#cell-1-1-1:checked):has(#cell-1-2-2:checked):has(#cell-1-3-3:checked) #player1-wins {
+    display: block;
+}
+
+:root:has(#cell-1-1-3:checked):has(#cell-1-2-2:checked):has(#cell-1-3-1:checked) #player1-wins {
+    display: block;
+}
+
+/**
+ * Player2 wins.
+ */
+:root:has(#cell-2-1-1:checked):has(#cell-2-1-2:checked):has(#cell-2-1-3:checked) #player2-wins {
+    display: block;
+}
+
+:root:has(#cell-2-2-1:checked):has(#cell-2-2-2:checked):has(#cell-2-2-3:checked) #player2-wins {
+    display: block;
+}
+
+:root:has(#cell-2-3-1:checked):has(#cell-2-3-2:checked):has(#cell-2-3-3:checked) #player2-wins {
+    display: block;
+}
+
+:root:has(#cell-2-1-1:checked):has(#cell-2-2-1:checked):has(#cell-2-3-1:checked) #player2-wins {
+    display: block;
+}
+
+:root:has(#cell-2-1-2:checked):has(#cell-2-2-2:checked):has(#cell-2-3-2:checked) #player2-wins {
+    display: block;
+}
+
+:root:has(#cell-2-1-3:checked):has(#cell-2-2-3:checked):has(#cell-2-3-3:checked) #player2-wins {
+    display: block;
+}
+
+:root:has(#cell-2-1-1:checked):has(#cell-2-2-2:checked):has(#cell-2-3-3:checked) #player2-wins {
+    display: block;
+}
+
+:root:has(#cell-2-1-3:checked):has(#cell-2-2-2:checked):has(#cell-2-3-1:checked) #player2-wins {
+    display: block;
+}
+
+.end-of-game {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 320px;
+    border: solid 1px black;
+    background-color: white;
+    z-index: 1;
+    text-align: center;
+    line-height: 300px;
+    display: none;
+}
