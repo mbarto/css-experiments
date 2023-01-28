@@ -1,9 +1,24 @@
-/**
- * Initial settings.
- */
+@property --floor {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: true;
+}
+
 :root {
-    --turn: "1";
-    --player: 1;
+    /**
+     * 0-based play turn, from 0 to 8.
+     */
+    --turn: 0;
+    /**
+     * To get the current player from turn we need to calculate turn % 2. This gives a 0-based number,
+     * so sum 1 at the end.
+     * This is equivalent to turn - 2 * Math.floor(turn / 2)
+     * Math.floor(turn / 2) is stored in the --floor variable and is calculated as turn / 2 - .5,
+     * rounded to its integer value by the @property definition above.
+     * For more info: https://css-tricks.com/using-absolute-value-sign-rounding-and-modulo-in-css-today/
+     */
+    --floor: calc((var(--turn))/ 2 - .5);
+    --player: calc((var(--turn)) - 2 * var(--floor) + 1);
     --player1-symbol: "x";
     --player2-symbol: "o";
 }
@@ -75,44 +90,36 @@ input + label::after {
 /**
  * Calculate turn and current player from checked cells.
  */
-:root:has(input:checked) {
-    --turn: "2";
-    --player: 2;
+:root:has(#player1-grid input:checked) {
+    --turn: 1;
 }
 
 :root:has(#player1-grid input:checked):has(#player2-grid input:checked) {
-    --turn: "3";
-    --player: 1;
+    --turn: 2;
 }
 
 :root:has(#player1-grid input:checked ~ input:checked):has(#player2-grid input:checked) {
-    --turn: "4";
-    --player: 2;
+    --turn: 3;
 }
 
 :root:has(#player1-grid input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked) {
-    --turn: "5";
-    --player: 1;
+    --turn: 4;
 }
 
 :root:has(#player1-grid input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked) {
-    --turn: "6";
-    --player: 2;
+    --turn: 5;
 }
 
 :root:has(#player1-grid input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked) {
-    --turn: "7";
-    --player: 1;
+    --turn: 6;
 }
 
 :root:has(#player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked) {
-    --turn: "8";
-    --player: 2;
+    --turn: 7;
 }
 
 :root:has(#player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked ~ input:checked) {
-    --turn: "9";
-    --player: 1;
+    --turn: 8;
 }
 
 :root:has(#player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked ~ input:checked) #draw {
