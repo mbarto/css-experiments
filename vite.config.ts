@@ -27,7 +27,12 @@ export default defineConfig({
   plugins: [react()],
   css: {
     postcss: {
-      plugins: [postcssWhen(), postcssHasPseudo(), postcssFor(), postcssDynamicValue()],
+      plugins: [
+        postcssWhen(),
+        postcssHasPseudo(),
+        postcssFor(),
+        postcssDynamicValue(),
+      ],
     },
   },
 });

@@ -23,11 +23,18 @@
     --player2-symbol: "o";
 }
 
+body {
+    font-family: Arial;
+}
+
+
 #grids-container {
     position: relative;
     width: 300px;
-    height: 350px;
+    height: 305px;
+    box-shadow: 5px 5px 3px #666;
     z-index: 0;
+    margin-bottom: 40px;
 }
 
 .player-grid {
@@ -64,18 +71,19 @@ input[type="checkbox"]:checked + label {
 }
 
 .player-grid label {
-    width: 90px;
+    width: 100px;
     height: 100px;
     border: solid 1px black;
     font-size: 150px;
-    line-height: 80px;
-    padding-left: 10px;
-    font-family: Arial;
+    line-height: 50px;
+    font-family: cursive;
+    text-align: center;
 }
 
 input + label::after {
     display: none;
 }
+
 
 #player1-grid input:checked + label::after {
     content: var(--player1-symbol);
@@ -271,16 +279,83 @@ input + label::after {
     display: block;
 }
 
+/**
+ * End of game message.
+ */
+#player1-wins, #player2-wins {
+    z-index: 1;
+}
+
+#draw {
+    z-index: 0;
+}
+
 .end-of-game {
     position: absolute;
     top: 0;
     left: 0;
     width: 320px;
     height: 320px;
-    border: solid 1px black;
-    background-color: white;
+    background-color: rgba(255, 255, 255, .4);
     z-index: 1;
     text-align: center;
     line-height: 300px;
     display: none;
+}
+
+.end-of-game span {
+    opacity: 100%;
+    border: solid 1px black;
+    padding: 5px;
+    background-color: white;
+}
+
+/**
+ * Reset.
+ */
+input[type="reset"] {
+    padding: 10px;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+@keyframes player-is-current {
+    from {
+        visibility: visible;
+    }
+}
+
+#current-player {
+    position: relative;
+}
+
+#current-player div {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#current-player-1 {
+    animation: 1s player-is-current paused;
+    animation-delay: calc((1 - var(--player)) * 1s);
+}
+
+#current-player-2 {
+    animation: 1s player-is-current paused;
+    animation-delay: calc((2 - var(--player)) * 1s);
+}
+
+#player1-symbol span::after, #current-player-1 span::after {
+    font-family: cursive;
+    content: var(--player1-symbol);
+}
+
+#player2-symbol span::after, #current-player-2 span::after {
+    font-family: cursive;
+    content: var(--player2-symbol);
 }
