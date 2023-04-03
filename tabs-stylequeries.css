@@ -1,0 +1,81 @@
+body {
+    overflow: hidden;
+}
+
+:root {
+    --selected-tab: 1;
+    --panel-width: 300px;
+}
+
+:root:has(#tab1:checked) {
+    --selected-tab: 1;
+}
+
+:root:has(#tab2:checked) {
+    --selected-tab: 2;
+}
+
+:root:has(#tab3:checked) {
+    --selected-tab: 3;
+}
+
+.panel {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: var(--panel-width);
+    bottom: 0;
+    border: solid 1px black;
+    padding: 10px;
+    display: none;
+}
+
+@supports not selector(:has(a, b)) {
+    .panel::after {
+        position: relative;
+        display: inline-block;
+        top: 2rem;
+        text-align: center;
+        width: var(--panel-width);
+        content: "Selector :has not supported on this browser!\A Cannot implement tab switching"
+    }
+}
+
+@container style(--selected-tab: 1) {
+    #tabpanel1 {
+        display: block;
+    }
+}
+
+@container style(--selected-tab: 3) {
+    #tabpanel3 {
+        display: block;
+    }
+}
+
+@container style(--selected-tab: 2) {
+    #tabpanel2 {
+        display: block;
+    }
+}
+ 
+input[type=radio] {
+    appearance: none;
+}
+
+input[type=radio]:not(:checked) {
+    cursor: pointer;
+}
+
+input[type=radio]::after {
+    border: solid 1px black;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    content: attr(data-title);
+}
+
+input[type=radio]:not(:checked)::after {
+    background-color: #CCC;
+}

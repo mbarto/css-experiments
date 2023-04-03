@@ -21,6 +21,7 @@ export default defineConfig({
         colors: "colors.html",
         colorspolyfill: "colors-polyfill.html",
         tictactoe: "tictactoe.html",
+        tabsstylequeries: "tabs-stylequeries.html",
       },
     },
   },
