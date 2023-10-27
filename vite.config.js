@@ -21,6 +21,7 @@ export default defineConfig({
         colors: "colorchooser/colors.html",
         colorspolyfill: "colorchooser/colors-polyfill.html",
         tictactoe: "tictactoe/tictactoe.html",
+        spaceinvaders: "spaceinvaders/spaceinvaders.html",
       },
     },
   },

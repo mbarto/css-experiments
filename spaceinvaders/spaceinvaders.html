@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="spaceinvaders.css">
+        <script src="https://unpkg.com/postcss-dynamic-value@0.0.4/polyfill.js"></script>
+        <title>CSS Experiments: Space Invaders</title>
+    </head>
+    <body>
+        <form id="root">
+            <label for="position-0"></label>
+            <label for="position-10"></label>
+            <label for="position-20"></label>
+            <label for="position-30"></label>
+            <label for="position-40"></label>
+            <label for="position-50"></label>
+            <label for="position-60"></label>
+            <label for="position-70"></label>
+            <label for="position-80"></label>
+            <label for="position-90"></label>
+            <label for="position-100"></label>
+            <div id="playground">
+                <div id="header">
+                    <div><span>SCORE</span><span id="score"></span></div>
+                    <div><span>LIVES</span><span id="lives"></span></div>
+                </div>
+                <div id="playerzone">
+                    <div id="player"></div>
+                </div>
+            </div>
+            <div id="controls">
+                <input type="radio" name="position" id="position-0" checked autofocus/>
+                <input type="radio" name="position" id="position-10" />
+                <input type="radio" name="position" id="position-20" />
+                <input type="radio" name="position" id="position-30" />
+                <input type="radio" name="position" id="position-40" />
+                <input type="radio" name="position" id="position-50" />
+                <input type="radio" name="position" id="position-60" />
+                <input type="radio" name="position" id="position-70" />
+                <input type="radio" name="position" id="position-80" />
+                <input type="radio" name="position" id="position-90" />
+                <input type="radio" name="position" id="position-100" />
+            </div>
+        </form>
+    </body>
+</html>
