@@ -1,9 +1,8 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import postcssWhen from "postcss-when"
+import { defineConfig } from "vite";
+import postcssWhen from "postcss-when";
 import postcssDynamicValue from "postcss-dynamic-value";
 import postcssFor from "postcss-for";
-import postcssHasPseudo from "css-has-pseudo"
+import postcssHasPseudo from "css-has-pseudo";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,7 +24,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react()],
+  plugins: [],
   css: {
     postcss: {
       plugins: [
