@@ -166,10 +166,11 @@ label {
   width: 100cqw;
   top: 10cqh;
   left: 0;
-  animation: invaders steps(20) 5s infinite alternate;
+  animation: invaders-horizontal steps(20) 5s 14 alternate,
+    invaders-vertical steps(7) 70s 1 forwards;
 }
 
-@keyframes invaders {
+@keyframes invaders-horizontal {
   0% {
     left: 0;
   }
@@ -178,13 +179,22 @@ label {
   }
 }
 
+@keyframes invaders-vertical {
+  0% {
+    top: 10cqh;
+  }
+  100% {
+    top: 30cqw;
+  }
+}
+
 .invaders-row {
   height: 8cqh;
   display: flex;
   flex-direction: row;
   gap: 8cqw;
-  padding-left: 1em;
-  padding-top: 1em;
+  padding-left: 2cqw;
+  padding-top: 1cqh;
 }
 
 .invaders {
