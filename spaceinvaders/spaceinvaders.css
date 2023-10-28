@@ -4,8 +4,8 @@
   --player-position: 0;
   --score: 0;
   --lives: 3;
-  --playground-width: 800;
-  --playground-height: 600;
+  --playground-width: 50;
+  --playground-height: 30;
   --player-width: 6cqw;
   --out-of-screen: -10000px;
   --player-step: 1cqw * 0.9;
@@ -28,12 +28,12 @@ form {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
+  font-size: 1cqw;
   background-color: #5b7a8c;
 }
 
 #frame {
-  width: calc(var(--playground-width) * 1px * 1.05);
+  width: calc(var(--playground-width) * 1cqw * 1.05);
   aspect-ratio: var(--playground-width) / var(--playground-height);
   background-color: #000;
   display: flex;
@@ -42,7 +42,8 @@ form {
 }
 
 #playground {
-  width: calc(var(--playground-width) * 1px);
+  font-size: 1cqw;
+  width: calc(var(--playground-width) * 1cqw);
   aspect-ratio: var(--playground-width) / var(--playground-height);
   background-color: #000;
   color: white;
