@@ -69,6 +69,29 @@ form {
   image-rendering: pixelated;
 }
 
+#shot {
+  background-color: red;
+  height: 10px;
+  position: absolute;
+  bottom: 0;
+  left: -10000px;
+  width: 5px;
+}
+
+@keyframes shot {
+  from {
+    bottom: 8cqh;
+  }
+  to {
+    bottom: 95cqh;
+  }
+}
+
+body:has(input[type="radio"]:active) #shot {
+  left: calc(var(--player-position) * 1cqw * 0.9 + 28px);
+  animation: shot 1s linear;
+}
+
 #score::after {
   counter-reset: score var(--score);
   content: counter(score);
