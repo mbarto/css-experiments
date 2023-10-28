@@ -4,6 +4,11 @@
   --player-position: 0;
   --score: 0;
   --lives: 3;
+  --playground-width: 800;
+  --playground-height: 600;
+  --player-width: 6cqw;
+  --out-of-screen: -10000px;
+  --player-step: 1cqw * 0.9;
 }
 
 html,
@@ -22,27 +27,43 @@ form {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+
+  background-color: #5b7a8c;
+}
+
+#frame {
+  width: calc(var(--playground-width) * 1px * 1.05);
+  aspect-ratio: var(--playground-width) / var(--playground-height);
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #playground {
-  width: 800px;
-  aspect-ratio: 800 / 600;
+  width: calc(var(--playground-width) * 1px);
+  aspect-ratio: var(--playground-width) / var(--playground-height);
   background-color: #000;
   color: white;
   position: relative;
   container-type: size;
 }
 
+#instructions {
+  margin-top: 1em;
+  color: #33ff04;
+}
+
 #header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 10px;
   & div {
     display: flex;
     align-items: center;
     & span:nth-child(2) {
-      margin-left: 10px;
+      margin-left: 1em;
       color: #33ff04;
     }
   }
@@ -51,18 +72,18 @@ form {
 #playerzone {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 100cqw;
   left: 0;
   height: 6cqh;
   overflow: hidden;
   container-type: size;
-  padding: 10px;
 }
 
 #player {
   position: relative;
-  left: calc(var(--player-position) * 1cqw * 0.9);
-  height: 80cqh;
+  left: calc(var(--player-position) * var(--player-step));
+  width: var(--player-width);
+  aspect-ratio: 1 / 1;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAJCAYAAADpeqZqAAAAIUlEQVQYlWNgwAX+M/zHKYdTAwwOAk3/SYAka4BrHNSaALAfkW80h7cHAAAAAElFTkSuQmCC);
   background-size: contain;
   background-repeat: no-repeat;
@@ -71,16 +92,16 @@ form {
 
 #shot {
   background-color: red;
-  height: 10px;
+  height: 2cqh;
   position: absolute;
   bottom: 0;
-  left: -10000px;
-  width: 5px;
+  left: var(--out-of-screen);
+  width: 0.5cqw;
 }
 
 @keyframes shot {
   from {
-    bottom: 8cqh;
+    bottom: 5cqh;
   }
   to {
     bottom: 95cqh;
@@ -88,8 +109,10 @@ form {
 }
 
 body:has(input[type="radio"]:active) #shot {
-  left: calc(var(--player-position) * 1cqw * 0.9 + 28px);
-  animation: shot 1s linear;
+  left: calc(
+    var(--player-position) * var(--player-step) + var(--player-width) / 2
+  );
+  animation: shot 1s linear infinite;
 }
 
 #score::after {
@@ -125,5 +148,5 @@ label {
 
 #controls {
   position: absolute;
-  left: -10000px;
+  left: var(--out-of-screen);
 }
