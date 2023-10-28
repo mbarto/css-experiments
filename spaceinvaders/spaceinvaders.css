@@ -9,6 +9,9 @@
   --player-width: 6cqw;
   --out-of-screen: -10000px;
   --player-step: 1cqw * 0.9;
+  --invaders-color-1: #ff0000;
+  --invaders-color-2: #ffff00;
+  --invaders-color-3: #00ffff;
 }
 
 html,
@@ -155,4 +158,217 @@ label {
 #controls {
   position: absolute;
   left: var(--out-of-screen);
+}
+
+#invaderszone {
+  position: absolute;
+  height: 60cqh;
+  width: 100cqw;
+  top: 10cqh;
+  left: 0;
+  animation: invaders steps(20) 5s infinite alternate;
+}
+
+@keyframes invaders {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 20cqw;
+  }
+}
+
+.invaders-row {
+  height: 8cqh;
+  display: flex;
+  flex-direction: row;
+  gap: 8cqw;
+  padding-left: 1em;
+  padding-top: 1em;
+}
+
+.invaders {
+  font-size: 15px;
+  width: 0.25em;
+  height: 0.25em;
+  animation: 1s infinite;
+}
+
+.invaders-type-1 {
+  animation-name: space-invader-1;
+  box-shadow: 0 0 0 0.25em var(--invaders-color-1),
+    0 0.25em 0 0.25em var(--invaders-color-1),
+    -0.625em 0.375em 0 0.125em var(--invaders-color-1),
+    0.625em 0.375em 0 0.125em var(--invaders-color-1),
+    -0.75em -0.75em 0 0 var(--invaders-color-1),
+    0.75em -0.75em 0 0 var(--invaders-color-1),
+    -0.5em -0.5em 0 0 var(--invaders-color-1),
+    0.5em -0.5em 0 0 var(--invaders-color-1),
+    -0.75em -0.25em 0 0 var(--invaders-color-1),
+    -0.5em -0.25em 0 0 var(--invaders-color-1),
+    0.5em -0.25em 0 0 var(--invaders-color-1),
+    0.75em -0.25em 0 0 var(--invaders-color-1),
+    -1em 0 0 0 var(--invaders-color-1), -0.75em 0 0 0 var(--invaders-color-1),
+    0.75em 0 0 0 var(--invaders-color-1), 1em 0 0 0 var(--invaders-color-1),
+    -1em 0.25em 0 0 var(--invaders-color-1),
+    1em 0.25em 0 0 var(--invaders-color-1),
+    -0.75em 0.75em 0 0 var(--invaders-color-1),
+    0.75em 0.75em 0 0 var(--invaders-color-1),
+    1.25em 0.25em 0 0 var(--invaders-color-1),
+    1.25em 0.5em 0 0 var(--invaders-color-1),
+    1.25em 0.75em 0 0 var(--invaders-color-1),
+    -1.25em 0.25em 0 0 var(--invaders-color-1),
+    -1.25em 0.5em 0 0 var(--invaders-color-1),
+    -1.25em 0.75em 0 0 var(--invaders-color-1),
+    -0.25em 1em 0 0 var(--invaders-color-1),
+    -0.5em 1em 0 0 var(--invaders-color-1),
+    0.25em 1em 0 0 var(--invaders-color-1),
+    0.5em 1em 0 0 var(--invaders-color-1);
+}
+
+.invaders-type-2 {
+  animation-name: space-invader-2;
+  box-shadow: -0.125em -0.5em 0 0.25em var(--invaders-color-2),
+    0.125em -0.5em 0 0.25em var(--invaders-color-2),
+    -0.75em -0.375em 0 0.125em var(--invaders-color-2),
+    -0.875em -0.375em 0 0.125em var(--invaders-color-2),
+    0.75em -0.375em 0 0.125em var(--invaders-color-2),
+    0.875em -0.375em 0 0.125em var(--invaders-color-2),
+    -1em 0 0 0.25em var(--invaders-color-2),
+    1em 0 0 0.25em var(--invaders-color-2),
+    -0.5em 0.25em 0 0 var(--invaders-color-2),
+    -0.25em 0.25em 0 0 var(--invaders-color-2),
+    0 0.25em 0 0 var(--invaders-color-2),
+    0.25em 0.25em 0 0 var(--invaders-color-2),
+    0.5em 0.25em 0 0 var(--invaders-color-2),
+    0.3125em 0.5em 0 0 var(--invaders-color-2),
+    0.5em 0.5em 0 0 var(--invaders-color-2),
+    0.5em 0.5em 0 0 var(--invaders-color-2),
+    -0.3125em 0.5em 0 0 var(--invaders-color-2),
+    -0.5em 0.5em 0 0 var(--invaders-color-2),
+    -0.5em 0.5em 0 0 var(--invaders-color-2),
+    0.0625em 0.75em 0 0 var(--invaders-color-2),
+    -0.0625em 0.75em 0 0 var(--invaders-color-2),
+    -0.625em 0.75em 0 0 var(--invaders-color-2),
+    -0.8125em 0.75em 0 0 var(--invaders-color-2),
+    -1.0625em 1em 0 0 var(--invaders-color-2),
+    -1.25em 1em 0 0 var(--invaders-color-2),
+    0.625em 0.75em 0 0 var(--invaders-color-2),
+    0.8125em 0.75em 0 0 var(--invaders-color-2),
+    1.0625em 1em 0 0 var(--invaders-color-2),
+    1.25em 1em 0 0 var(--invaders-color-2);
+}
+
+.invaders-type-3 {
+  animation-name: space-invader-3;
+  box-shadow: 0 -0.625em 0 0.125em var(--invaders-color-3),
+    -0.25em -0.375em 0 0.125em var(--invaders-color-3),
+    0.25em -0.375em 0 0.125em var(--invaders-color-3),
+    0.625em -0.25em 0 0 var(--invaders-color-3),
+    -0.625em -0.25em 0 0 var(--invaders-color-3),
+    0 0.125em 0 0.125em var(--invaders-color-3),
+    -0.75em 0.125em 0 0.125em var(--invaders-color-3),
+    0.75em 0.125em 0 0.125em var(--invaders-color-3),
+    0.375em 0.25em 0 0 var(--invaders-color-3),
+    -0.375em 0.25em 0 0 var(--invaders-color-3),
+    0.125em 0.5em 0 0 var(--invaders-color-3),
+    -0.125em 0.5em 0 0 var(--invaders-color-3),
+    -0.625em 0.5em 0 0 var(--invaders-color-3),
+    -0.875em 0.75em 0 0 var(--invaders-color-3),
+    -0.625em 1em 0 0 var(--invaders-color-3),
+    -0.625em 1em 0 0 var(--invaders-color-3),
+    0.625em 0.5em 0 0 var(--invaders-color-3),
+    0.875em 0.75em 0 0 var(--invaders-color-3),
+    0.625em 1em 0 0 var(--invaders-color-3),
+    0.625em 1em 0 0 var(--invaders-color-3);
+}
+
+@keyframes space-invader-1 {
+  50% {
+    box-shadow: 0 0 0 0.25em var(--invaders-color-1),
+      0 0.25em 0 0.25em var(--invaders-color-1),
+      -0.625em 0.375em 0 0.125em var(--invaders-color-1),
+      0.625em 0.375em 0 0.125em var(--invaders-color-1),
+      -0.75em -0.75em 0 0 var(--invaders-color-1),
+      0.75em -0.75em 0 0 var(--invaders-color-1),
+      -0.5em -0.5em 0 0 var(--invaders-color-1),
+      0.5em -0.5em 0 0 var(--invaders-color-1),
+      -0.75em -0.25em 0 0 var(--invaders-color-1),
+      -0.5em -0.25em 0 0 var(--invaders-color-1),
+      0.5em -0.25em 0 0 var(--invaders-color-1),
+      0.75em -0.25em 0 0 var(--invaders-color-1),
+      -1em 0 0 0 var(--invaders-color-1), -0.75em 0 0 0 var(--invaders-color-1),
+      0.75em 0 0 0 var(--invaders-color-1), 1em 0 0 0 var(--invaders-color-1),
+      -1em 0.25em 0 0 var(--invaders-color-1),
+      1em 0.25em 0 0 var(--invaders-color-1),
+      -0.75em 0.75em 0 0 var(--invaders-color-1),
+      0.75em 0.75em 0 0 var(--invaders-color-1),
+      1.25em 0 0 0 var(--invaders-color-1),
+      1.25em -0.25em 0 0 var(--invaders-color-1),
+      1.25em -0.5em 0 0 var(--invaders-color-1),
+      -1.25em 0 0 0 var(--invaders-color-1),
+      -1.25em -0.25em 0 0 var(--invaders-color-1),
+      -1.25em -0.5em 0 0 var(--invaders-color-1),
+      -1em 1em 0 0 var(--invaders-color-1), -1em 1em 0 0 var(--invaders-color-1),
+      1em 1em 0 0 var(--invaders-color-1), 1em 1em 0 0 var(--invaders-color-1);
+  }
+}
+
+@keyframes space-invader-2 {
+  50% {
+    box-shadow: -0.125em -0.5em 0 0.25em var(--invaders-color-2),
+      0.125em -0.5em 0 0.25em var(--invaders-color-2),
+      -0.75em -0.375em 0 0.125em var(--invaders-color-2),
+      -0.875em -0.375em 0 0.125em var(--invaders-color-2),
+      0.75em -0.375em 0 0.125em var(--invaders-color-2),
+      0.875em -0.375em 0 0.125em var(--invaders-color-2),
+      -1em 0 0 0.25em var(--invaders-color-2),
+      1em 0 0 0.25em var(--invaders-color-2),
+      -0.5em 0.25em 0 0 var(--invaders-color-2),
+      -0.25em 0.25em 0 0 var(--invaders-color-2),
+      0 0.25em 0 0 var(--invaders-color-2),
+      0.25em 0.25em 0 0 var(--invaders-color-2),
+      0.5em 0.25em 0 0 var(--invaders-color-2),
+      0.3125em 0.5em 0 0 var(--invaders-color-2),
+      0.5em 0.5em 0 0 var(--invaders-color-2),
+      0.625em 0.5em 0 0 var(--invaders-color-2),
+      -0.3125em 0.5em 0 0 var(--invaders-color-2),
+      -0.5em 0.5em 0 0 var(--invaders-color-2),
+      -0.625em 0.5em 0 0 var(--invaders-color-2),
+      0.0625em 0.75em 0 0 var(--invaders-color-2),
+      -0.0625em 0.75em 0 0 var(--invaders-color-2),
+      -0.75em 0.75em 0 0 var(--invaders-color-2),
+      -0.9375em 0.75em 0 0 var(--invaders-color-2),
+      -0.75em 1em 0 0 var(--invaders-color-2),
+      -0.5em 1em 0 0 var(--invaders-color-2),
+      0.75em 0.75em 0 0 var(--invaders-color-2),
+      0.9375em 0.75em 0 0 var(--invaders-color-2),
+      0.75em 1em 0 0 var(--invaders-color-2),
+      0.5em 1em 0 0 var(--invaders-color-2);
+  }
+}
+
+@keyframes space-invader-3 {
+  50% {
+    box-shadow: 0 -0.625em 0 0.125em var(--invaders-color-3),
+      -0.25em -0.375em 0 0.125em var(--invaders-color-3),
+      0.25em -0.375em 0 0.125em var(--invaders-color-3),
+      0.625em -0.25em 0 0 var(--invaders-color-3),
+      -0.625em -0.25em 0 0 var(--invaders-color-3),
+      0 0.125em 0 0.125em var(--invaders-color-3),
+      -0.75em 0.125em 0 0.125em var(--invaders-color-3),
+      0.75em 0.125em 0 0.125em var(--invaders-color-3),
+      0.375em 0.25em 0 0 var(--invaders-color-3),
+      -0.375em 0.25em 0 0 var(--invaders-color-3),
+      0.125em 0.5em 0 0 var(--invaders-color-3),
+      -0.125em 0.5em 0 0 var(--invaders-color-3),
+      -0.375em 0.5em 0 0 var(--invaders-color-3),
+      -0.625em 0.75em 0 0 var(--invaders-color-3),
+      -0.875em 1em 0 0 var(--invaders-color-3),
+      -0.375em 1em 0 0 var(--invaders-color-3),
+      0.375em 0.5em 0 0 var(--invaders-color-3),
+      0.625em 0.75em 0 0 var(--invaders-color-3),
+      0.875em 1em 0 0 var(--invaders-color-3),
+      0.375em 1em 0 0 var(--invaders-color-3);
+  }
 }
