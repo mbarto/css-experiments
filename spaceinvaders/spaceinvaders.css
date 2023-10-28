@@ -49,6 +49,7 @@ form {
   color: white;
   position: relative;
   container-type: size;
+  overflow: hidden;
 }
 
 #instructions {
@@ -95,25 +96,29 @@ form {
   background-color: red;
   height: 2cqh;
   position: absolute;
-  bottom: 0;
-  left: var(--out-of-screen);
+  bottom: 105cqh;
   width: 0.5cqw;
-}
-
-@keyframes shot {
-  from {
-    bottom: 5cqh;
-  }
-  to {
-    bottom: 95cqh;
-  }
-}
-
-body:has(input[type="radio"]:active) #shot {
   left: calc(
     var(--player-position) * var(--player-step) + var(--player-width) / 2
   );
-  animation: shot 1s linear infinite;
+}
+
+@for $i from 0 to 100 by 10 {
+  body:has(#position-$i:active) #shot {
+    bottom: 5cqh;
+    transition: none;
+  }
+}
+
+body:has(#position-0:not(:active)):has(#position-10:not(:active)):has(
+    #position-20:not(:active)
+  ):has(#position-30:not(:active)):has(#position-40:not(:active)):has(
+    #position-50:not(:active)
+  ):has(#position-60:not(:active)):has(#position-70:not(:active)):has(
+    #position-80:not(:active)
+  ):has(#position-90:not(:active)):has(#position-100:not(:active))
+  #shot {
+  transition: bottom 1s linear;
 }
 
 #score::after {
