@@ -19,6 +19,7 @@ export default defineConfig({
         tabsstylequeries: "tabpanel/tabs-stylequeries.html",
         toc: "toc/toc.html",
         colors: "colorchooser/colors.html",
+        colorsscrolldriven: "colorchooser/colors-scroll-driven-animation.html",
         colorspolyfill: "colorchooser/colors-polyfill.html",
         tictactoe: "tictactoe/tictactoe.html",
         spaceinvaders: "spaceinvaders/spaceinvaders.html",

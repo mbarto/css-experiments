@@ -1,0 +1,86 @@
+@property --_h {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --_s {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --_l {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --hue {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --saturation {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --lightness {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0;
+}
+
+:root {
+  --hue: calc(var(--_h) * 360deg);
+  --saturation: calc(var(--_s) * 100%);
+  --lightness: calc(var(--_l) * 100%);
+
+  timeline-scope: --_h, --_s, --_l;
+  animation: linear both;
+  animation-name: --_h, --_s, --_l;
+  animation-timeline: --_h, --_s, --_l;
+  animation-range: entry 100% exit 0%;
+}
+
+@keyframes --_h {
+  0% {
+    --_h: 1;
+  }
+}
+@keyframes --_s {
+  0% {
+    --_s: 1;
+  }
+}
+@keyframes --_l {
+  0% {
+    --_l: 1;
+  }
+}
+
+input[type="range"] {
+  overflow: hidden;
+}
+input[type="range"]::-webkit-slider-thumb {
+  view-timeline: var(--timeline) inline;
+}
+input[type="range"]::-moz-range-thumb {
+  view-timeline: var(--timeline) inline;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+}
+
+#bars {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 30%;
+}
+
+#sample {
+  width: 200px;
+  aspect-ratio: 1;
+  background-color: hsl(var(--hue), var(--saturation), var(--lightness));
+}
