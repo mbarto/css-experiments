@@ -1,361 +1,387 @@
-@property --floor {
-  syntax: '<integer>';
-  initial-value: 0;
-  inherits: true;
-}
-
 :root {
-    /**
+  /**
      * 0-based play turn, from 0 to 8.
      */
-    --turn: 0;
-    /**
-     * To get the current player from turn we need to calculate turn % 2. This gives a 0-based number,
-     * so sum 1 at the end.
-     * This is equivalent to turn - 2 * Math.floor(turn / 2)
-     * Math.floor(turn / 2) is stored in the --floor variable and is calculated as turn / 2 - .5,
-     * rounded to its integer value by the @property definition above.
-     * For more info: https://css-tricks.com/using-absolute-value-sign-rounding-and-modulo-in-css-today/
-     */
-    --floor: calc((var(--turn))/ 2 - .5);
-    --player: calc((var(--turn)) - 2 * var(--floor) + 1);
-    --player1-symbol: "x";
-    --player2-symbol: "o";
+  --turn: 0;
+  --player: calc(mod(var(--turn), 2) + 1);
+  --player1-symbol: "x";
+  --player2-symbol: "o";
 }
 
 body {
-    font-family: Arial;
+  font-family: Arial;
 }
 
-
 #grids-container {
-    position: relative;
-    width: 300px;
-    height: 305px;
-    box-shadow: 5px 5px 3px #666;
-    z-index: 0;
-    margin-bottom: 40px;
+  position: relative;
+  width: 300px;
+  height: 305px;
+  box-shadow: 5px 5px 3px #666;
+  z-index: 0;
+  margin-bottom: 40px;
 }
 
 .player-grid {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: grid;
-    grid-template-columns: 0 100px 0 100px 0 100px;
-    width: 300px;
-    height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 0 100px 0 100px 0 100px;
+  width: 300px;
+  height: 300px;
 }
 
 /** --player=1 -> 1, --player=2 -> 0 **/
 #player1-grid {
-    z-index: calc(2 - var(--player)); 
+  z-index: calc(2 - var(--player));
 }
 /** --player=1 -> 0, --player=2 -> 1 **/
 #player2-grid {
-    z-index: calc(1 - calc(2 - var(--player))); 
+  z-index: calc(1 - calc(2 - var(--player)));
 }
 
 input[type="checkbox"] {
-    appearance: none;
-    width: 0;
-    height: 0;
+  appearance: none;
+  width: 0;
+  height: 0;
 }
 
 input[type="checkbox"]:not(:checked) + label {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 input[type="checkbox"]:checked + label {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 .player-grid label {
-    width: 100px;
-    height: 100px;
-    border: solid 1px black;
-    font-size: 150px;
-    line-height: 50px;
-    font-family: cursive;
-    text-align: center;
+  width: 100px;
+  height: 100px;
+  border: solid 1px black;
+  font-size: 150px;
+  line-height: 50px;
+  font-family: cursive;
+  text-align: center;
 }
 
 input + label::after {
-    display: none;
+  display: none;
 }
 
-
 #player1-grid input:checked + label::after {
-    content: var(--player1-symbol);
-    display: inline;
+  content: var(--player1-symbol);
+  display: inline;
 }
 
 #player2-grid input:checked + label::after {
-    content: var(--player2-symbol);
-    display: inline;
+  content: var(--player2-symbol);
+  display: inline;
 }
 
 /**
  * Calculate turn and current player from checked cells.
  */
 :root:has(#player1-grid input:checked) {
-    --turn: 1;
+  --turn: 1;
 }
 
 :root:has(#player1-grid input:checked):has(#player2-grid input:checked) {
-    --turn: 2;
+  --turn: 2;
 }
 
-:root:has(#player1-grid input:checked ~ input:checked):has(#player2-grid input:checked) {
-    --turn: 3;
+:root:has(#player1-grid input:checked ~ input:checked):has(
+    #player2-grid input:checked
+  ) {
+  --turn: 3;
 }
 
-:root:has(#player1-grid input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked) {
-    --turn: 4;
+:root:has(#player1-grid input:checked ~ input:checked):has(
+    #player2-grid input:checked ~ input:checked
+  ) {
+  --turn: 4;
 }
 
-:root:has(#player1-grid input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked) {
-    --turn: 5;
+:root:has(#player1-grid input:checked ~ input:checked ~ input:checked):has(
+    #player2-grid input:checked ~ input:checked
+  ) {
+  --turn: 5;
 }
 
-:root:has(#player1-grid input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked) {
-    --turn: 6;
+:root:has(#player1-grid input:checked ~ input:checked ~ input:checked):has(
+    #player2-grid input:checked ~ input:checked ~ input:checked
+  ) {
+  --turn: 6;
 }
 
-:root:has(#player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked) {
-    --turn: 7;
+:root:has(
+    #player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked
+  ):has(#player2-grid input:checked ~ input:checked ~ input:checked) {
+  --turn: 7;
 }
 
-:root:has(#player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked ~ input:checked) {
-    --turn: 8;
+:root:has(
+    #player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked
+  ):has(
+    #player2-grid input:checked ~ input:checked ~ input:checked ~ input:checked
+  ) {
+  --turn: 8;
 }
 
-:root:has(#player1-grid input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked):has(#player2-grid input:checked ~ input:checked ~ input:checked ~ input:checked) #draw {
-    display: block;
+:root:has(
+    #player1-grid
+      input:checked
+      ~ input:checked
+      ~ input:checked
+      ~ input:checked
+      ~ input:checked
+  ):has(
+    #player2-grid input:checked ~ input:checked ~ input:checked ~ input:checked
+  )
+  #draw {
+  display: block;
 }
 
 /**
  * Avoid checkability of cells already checked by the other player.
  */
 :root:has(#cell-1-1-1:checked) #cell-2-1-1 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-1-1-2:checked) #cell-2-1-2 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-1-1-3:checked) #cell-2-1-3 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-1-2-1:checked) #cell-2-2-1 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-1-2-2:checked) #cell-2-2-2 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-1-2-3:checked) #cell-2-2-3 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-1-3-1:checked) #cell-2-3-1 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-1-3-2:checked) #cell-2-3-2 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-1-3-3:checked) #cell-2-3-3 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-2-1-1:checked) #cell-1-1-1 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-2-1-2:checked) #cell-1-1-2 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-2-1-3:checked) #cell-1-1-3 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-2-2-1:checked) #cell-1-2-1 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-2-2-2:checked) #cell-1-2-2 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-2-2-3:checked) #cell-1-2-3 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-2-3-1:checked) #cell-1-3-1 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-2-3-2:checked) #cell-1-3-2 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 :root:has(#cell-2-3-3:checked) #cell-1-3-3 + label {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 /**
  * Player1 wins.
  */
-:root:has(#cell-1-1-1:checked):has(#cell-1-1-2:checked):has(#cell-1-1-3:checked) #player1-wins {
-    display: block;
+:root:has(#cell-1-1-1:checked):has(#cell-1-1-2:checked):has(#cell-1-1-3:checked)
+  #player1-wins {
+  display: block;
 }
 
-:root:has(#cell-1-2-1:checked):has(#cell-1-2-2:checked):has(#cell-1-2-3:checked) #player1-wins {
-    display: block;
+:root:has(#cell-1-2-1:checked):has(#cell-1-2-2:checked):has(#cell-1-2-3:checked)
+  #player1-wins {
+  display: block;
 }
 
-:root:has(#cell-1-3-1:checked):has(#cell-1-3-2:checked):has(#cell-1-3-3:checked) #player1-wins {
-    display: block;
+:root:has(#cell-1-3-1:checked):has(#cell-1-3-2:checked):has(#cell-1-3-3:checked)
+  #player1-wins {
+  display: block;
 }
 
-:root:has(#cell-1-1-1:checked):has(#cell-1-2-1:checked):has(#cell-1-3-1:checked) #player1-wins {
-    display: block;
+:root:has(#cell-1-1-1:checked):has(#cell-1-2-1:checked):has(#cell-1-3-1:checked)
+  #player1-wins {
+  display: block;
 }
 
-:root:has(#cell-1-1-2:checked):has(#cell-1-2-2:checked):has(#cell-1-3-2:checked) #player1-wins {
-    display: block;
+:root:has(#cell-1-1-2:checked):has(#cell-1-2-2:checked):has(#cell-1-3-2:checked)
+  #player1-wins {
+  display: block;
 }
 
-:root:has(#cell-1-1-3:checked):has(#cell-1-2-3:checked):has(#cell-1-3-3:checked) #player1-wins {
-    display: block;
+:root:has(#cell-1-1-3:checked):has(#cell-1-2-3:checked):has(#cell-1-3-3:checked)
+  #player1-wins {
+  display: block;
 }
 
-:root:has(#cell-1-1-1:checked):has(#cell-1-2-2:checked):has(#cell-1-3-3:checked) #player1-wins {
-    display: block;
+:root:has(#cell-1-1-1:checked):has(#cell-1-2-2:checked):has(#cell-1-3-3:checked)
+  #player1-wins {
+  display: block;
 }
 
-:root:has(#cell-1-1-3:checked):has(#cell-1-2-2:checked):has(#cell-1-3-1:checked) #player1-wins {
-    display: block;
+:root:has(#cell-1-1-3:checked):has(#cell-1-2-2:checked):has(#cell-1-3-1:checked)
+  #player1-wins {
+  display: block;
 }
 
 /**
  * Player2 wins.
  */
-:root:has(#cell-2-1-1:checked):has(#cell-2-1-2:checked):has(#cell-2-1-3:checked) #player2-wins {
-    display: block;
+:root:has(#cell-2-1-1:checked):has(#cell-2-1-2:checked):has(#cell-2-1-3:checked)
+  #player2-wins {
+  display: block;
 }
 
-:root:has(#cell-2-2-1:checked):has(#cell-2-2-2:checked):has(#cell-2-2-3:checked) #player2-wins {
-    display: block;
+:root:has(#cell-2-2-1:checked):has(#cell-2-2-2:checked):has(#cell-2-2-3:checked)
+  #player2-wins {
+  display: block;
 }
 
-:root:has(#cell-2-3-1:checked):has(#cell-2-3-2:checked):has(#cell-2-3-3:checked) #player2-wins {
-    display: block;
+:root:has(#cell-2-3-1:checked):has(#cell-2-3-2:checked):has(#cell-2-3-3:checked)
+  #player2-wins {
+  display: block;
 }
 
-:root:has(#cell-2-1-1:checked):has(#cell-2-2-1:checked):has(#cell-2-3-1:checked) #player2-wins {
-    display: block;
+:root:has(#cell-2-1-1:checked):has(#cell-2-2-1:checked):has(#cell-2-3-1:checked)
+  #player2-wins {
+  display: block;
 }
 
-:root:has(#cell-2-1-2:checked):has(#cell-2-2-2:checked):has(#cell-2-3-2:checked) #player2-wins {
-    display: block;
+:root:has(#cell-2-1-2:checked):has(#cell-2-2-2:checked):has(#cell-2-3-2:checked)
+  #player2-wins {
+  display: block;
 }
 
-:root:has(#cell-2-1-3:checked):has(#cell-2-2-3:checked):has(#cell-2-3-3:checked) #player2-wins {
-    display: block;
+:root:has(#cell-2-1-3:checked):has(#cell-2-2-3:checked):has(#cell-2-3-3:checked)
+  #player2-wins {
+  display: block;
 }
 
-:root:has(#cell-2-1-1:checked):has(#cell-2-2-2:checked):has(#cell-2-3-3:checked) #player2-wins {
-    display: block;
+:root:has(#cell-2-1-1:checked):has(#cell-2-2-2:checked):has(#cell-2-3-3:checked)
+  #player2-wins {
+  display: block;
 }
 
-:root:has(#cell-2-1-3:checked):has(#cell-2-2-2:checked):has(#cell-2-3-1:checked) #player2-wins {
-    display: block;
+:root:has(#cell-2-1-3:checked):has(#cell-2-2-2:checked):has(#cell-2-3-1:checked)
+  #player2-wins {
+  display: block;
 }
 
 /**
  * End of game message.
  */
-#player1-wins, #player2-wins {
-    z-index: 1;
+#player1-wins,
+#player2-wins {
+  z-index: 1;
 }
 
 #draw {
-    z-index: 0;
+  z-index: 0;
 }
 
 .end-of-game {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 320px;
-    height: 320px;
-    background-color: rgba(255, 255, 255, .4);
-    z-index: 1;
-    text-align: center;
-    line-height: 300px;
-    display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 320px;
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 1;
+  text-align: center;
+  line-height: 300px;
+  display: none;
 }
 
 .end-of-game span {
-    opacity: 100%;
-    border: solid 1px black;
-    padding: 5px;
-    background-color: white;
+  opacity: 100%;
+  border: solid 1px black;
+  padding: 5px;
+  background-color: white;
 }
 
 /**
  * Reset.
  */
 input[type="reset"] {
-    padding: 10px;
-    background-color: #0d6efd;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
+  padding: 10px;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 @keyframes player-is-current {
-    from {
-        visibility: visible;
-    }
+  from {
+    visibility: visible;
+  }
 }
 
 #current-player {
-    position: relative;
+  position: relative;
 }
 
 #current-player div {
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #current-player-1 {
-    animation: 1s player-is-current paused;
-    animation-delay: calc((1 - var(--player)) * 1s);
+  animation: 1s player-is-current paused;
+  animation-delay: calc((1 - var(--player)) * 1s);
 }
 
 #current-player-2 {
-    animation: 1s player-is-current paused;
-    animation-delay: calc((2 - var(--player)) * 1s);
+  animation: 1s player-is-current paused;
+  animation-delay: calc((2 - var(--player)) * 1s);
 }
 
-#player1-symbol span::after, #current-player-1 span::after {
-    font-family: cursive;
-    content: var(--player1-symbol);
+#player1-symbol span::after,
+#current-player-1 span::after {
+  font-family: cursive;
+  content: var(--player1-symbol);
 }
 
-#player2-symbol span::after, #current-player-2 span::after {
-    font-family: cursive;
-    content: var(--player2-symbol);
+#player2-symbol span::after,
+#current-player-2 span::after {
+  font-family: cursive;
+  content: var(--player2-symbol);
 }
